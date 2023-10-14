@@ -1,0 +1,88 @@
+﻿@model IEnumerable<LotteryStatistics.Models.Numbers>
+@{
+    ViewData["Title"] = "Index";
+    var pageNumber = ViewData["PageNumber"] != null ? (int)ViewData["PageNumber"] : 1;
+    var pageSize = ViewData["PageSize"] != null ? (int)ViewData["PageSize"] : 20;
+    var totalItems = ViewData["TotalItems"] != null ? (int)ViewData["TotalItems"] : 0;
+    var totalPages = ViewData["TotalPages"] != null ? (int)ViewData["TotalPages"] : 0;
+}
+
+<h2 class="text-center m-4">Mega Sena</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.ContestNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number6)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContestNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number6)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <span>Page @pageNumber of @totalPages</span>
+    <br />
+    @if (pageNumber > 1)
+    {
+        <a href="?pageNumber=1&pageSize=@pageSize" class="btn btn-primary btn-sm">First Page</a>
+        <a href="?pageNumber=@(pageNumber - 1)&pageSize=@pageSize" class="btn btn-primary btn-sm">Previous Page</a>
+    }
+    @if (pageNumber < totalPages)
+    {
+        <a href="?pageNumber=@(pageNumber + 1)&pageSize=@pageSize" class="btn btn-primary btn-sm">Next Page</a>
+        <a href="?pageNumber=@totalPages&pageSize=@pageSize" class="btn btn-primary btn-sm">Last Page</a>
+    }
+</div>

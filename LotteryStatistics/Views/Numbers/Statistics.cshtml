@@ -1,0 +1,46 @@
+﻿@model LotteryStatistics.Models.ViewModels.StatisticsViewModel;
+@{
+
+    ViewData["Title"] = "Statistics";
+}
+
+<div class="text-center m-4">
+    <h2 class="display-4">Most Frequent 20 Numbers</h2>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <h6>Generating 6 random numbers from the 20 most repeated numbers.</h6>
+            <div class="number-container d-flex justify-content-center">
+                <input type="text" readonly="readonly" id="randomNumber1" />
+                <input type="text" readonly="readonly" id="randomNumber2" />
+                <input type="text" readonly="readonly" id="randomNumber3" />
+                <input type="text" readonly="readonly" id="randomNumber4" />
+                <input type="text" readonly="readonly" id="randomNumber5" />
+                <input type="text" readonly="readonly" id="randomNumber6" />
+            </div>
+            <button onclick="generateRandomNumbers()" class="btn btn-primary">Generate Numbers</button>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Frequency</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kvp in Model.MostFrequentNumbers)
+        {
+            <tr>
+                <td>@kvp.Key</td>
+                <td>@kvp.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
