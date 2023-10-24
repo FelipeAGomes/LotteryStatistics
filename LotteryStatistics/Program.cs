@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
 builder.Services.AddScoped<INumberService, NumberService>();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

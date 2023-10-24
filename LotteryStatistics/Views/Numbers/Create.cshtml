@@ -1,0 +1,62 @@
+﻿@model LotteryStatistics.Models.ViewModels.NumbersViewModel;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="numbers.ContestDate" class="control-label"></label>
+                <input asp-for="numbers.ContestNumber" class="form-control" />
+                <span asp-validation-for="numbers.ContestNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.ContestDate" class="control-label"></label>
+                <input asp-for="numbers.ContestDate" class="form-control" />
+                <span asp-validation-for="numbers.ContestDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number1" class="control-label"></label>
+                <input asp-for="numbers.Number1" class="form-control" />
+                <span asp-validation-for="numbers.Number1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number2" class="control-label"></label>
+                <input asp-for="numbers.Number2" class="form-control" />
+                <span asp-validation-for="numbers.Number2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number3" class="control-label"></label>
+                <input asp-for="numbers.Number3" class="form-control" />
+                <span asp-validation-for="numbers.Number3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number4" class="control-label"></label>
+                <input asp-for="numbers.Number4" class="form-control" />
+                <span asp-validation-for="numbers.Number4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number5" class="control-label"></label>
+                <input asp-for="numbers.Number5" class="form-control" />
+                <span asp-validation-for="numbers.Number5" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numbers.Number6" class="control-label"></label>
+                <input asp-for="numbers.Number6" class="form-control" />
+                <span asp-validation-for="numbers.Number6" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <a asp-action="Index" class="btn btn-primary">Back to list</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

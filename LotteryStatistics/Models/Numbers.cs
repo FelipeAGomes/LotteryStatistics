@@ -45,7 +45,12 @@ namespace LotteryStatistics.Models
             Number6 = number6;
             ContestNumber = contestNumber;
             ContestDate = contestDate;
-        }    
+        }
+
+        public Numbers()
+        {
+
+        }
     }
 }
 

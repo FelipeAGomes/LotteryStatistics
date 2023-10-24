@@ -1,5 +1,6 @@
 ﻿using System;
 using LotteryStatistics.Data;
+using LotteryStatistics.Models;
 using LotteryStatistics.Models.ViewModels;
 using LotteryStatistics.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,53 @@ namespace LotteryStatistics.Controllers
         {
             var randomNumbers = _numberService.GenerateRandomNumbersFromTop20(count);
             return Json(randomNumbers);
+        }
+
+        public async Task<IActionResult> SearchByDate(DateTime? minDate, DateTime? maxDate)
+        {
+            if (!minDate.HasValue)
+            {
+                minDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            }
+            if (!maxDate.HasValue)
+            {
+                maxDate = DateTime.Now;
+            }
+            ViewData["minDate"] = minDate.Value.ToString("dd-MM-yyyy");
+            ViewData["maxDate"] = maxDate.Value.ToString("dd-MM-yyyy");
+            var result = await _numberService.FindByDateAsync(minDate, maxDate);
+            return View(result);
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            var numbersViewModel = new NumbersViewModel
+            {
+                numbers = new Numbers()
+            };
+            return View(numbersViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(NumbersViewModel numbersViewModel)
+        {
+            try
+            {
+                // Certifique-se de que a propriedade numbers esteja inicializada
+                if (numbersViewModel.numbers == null)
+                {
+                    numbersViewModel.numbers = new Numbers();
+                }
+
+                await _numberService.InsertAsync(numbersViewModel);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                Console.WriteLine(ex);
+                return RedirectToAction("Error"); // Redirecionar para uma página de erro
+            }
         }
     }
 }

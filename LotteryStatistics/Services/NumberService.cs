@@ -1,5 +1,6 @@
 ﻿using LotteryStatistics.Data;
 using LotteryStatistics.Models;
+using LotteryStatistics.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace LotteryStatistics.Services
@@ -59,5 +60,28 @@ namespace LotteryStatistics.Services
             return randomNumbers;
         }
 
+        public async Task<List<Numbers>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
+        {
+            var result = from obj in _context.Numbers select obj;
+            if (minDate.HasValue)
+            {
+                result = result.Where(x => x.ContestDate >= minDate.Value);
+            }
+            if (maxDate.HasValue)
+            {
+                result = result.Where(x => x.ContestDate <= maxDate.Value);
+            }
+
+            return await result
+                .OrderByDescending(x => x.ContestDate)
+                .ToListAsync();
+
+        }
+
+        public async Task InsertAsync(NumbersViewModel obj)
+        {
+            _context.Add(obj.numbers);
+            await _context.SaveChangesAsync();
+        }
     }
 }

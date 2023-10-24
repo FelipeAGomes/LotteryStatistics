@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using LotteryStatistics.Models;
+using LotteryStatistics.Services;
 
 namespace LotteryStatistics.Controllers;
 
@@ -11,6 +12,7 @@ public class HomeController : Controller
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+
     }
 
     public IActionResult Index()
